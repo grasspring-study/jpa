@@ -14,7 +14,7 @@ public class MemberRepository {
 
 //    @PersistenceContext
 //    @PersistenceContext를 @Autowired가 대신할 수 있고(스프링 데이터 JPA), @RequiredArgsConstructor로 @Autowired를 생략할 수 있다.
-    private EntityManager em;
+    private final EntityManager em;
 
     public void save(Member member) {
         em.persist(member);
