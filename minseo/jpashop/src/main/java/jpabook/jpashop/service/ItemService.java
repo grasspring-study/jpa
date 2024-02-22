@@ -27,4 +27,15 @@ public class ItemService {
     public Item findOne(Long itemId) {
         return itemRepository.findOne(itemId);
     }
+
+    /**
+     * 영속성 컨텍스트가 자동 변경
+     */
+    @Transactional
+    public void updateItem(Long id, String name, int price, int stockQuantity) { // name, price, stockQuantity를 UpdateItemDTO로 묶을 수도 있음
+        Item item = itemRepository.findOne(id); // 영속 상태의 엔티티 조회
+        item.setName(name);
+        item.setPrice(price);
+        item.setStockQuantity(stockQuantity);
+    }
 }
