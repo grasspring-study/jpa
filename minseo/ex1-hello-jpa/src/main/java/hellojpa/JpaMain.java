@@ -15,20 +15,16 @@ public class JpaMain {
         tx.begin();
 
         try {
-            // 회원 등록
+
+            // 비영속
             Member member = new Member();
-            member.setId(2L);
-            member.setName("helloB");
+            member.setId(100L);
+            member.setName("HelloJPA");
 
-            em.persist(member);
-
-            // 회원 조회 (JPQL)
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                            .getResultList();
-
-            for (Member m : result ) {
-                System.out.println("member.name = " + m.getName());
-            }
+            // 영속
+            System.out.println("=== BEFORE ===");
+            em.persist(member) ;
+            System.out.println("=== AFTER ===");
 
             tx.commit();
         } catch (Exception e) {
