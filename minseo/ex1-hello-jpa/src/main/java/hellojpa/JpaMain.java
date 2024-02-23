@@ -16,21 +16,15 @@ public class JpaMain {
 
         try {
 
-            // 비영속
-            Member member = new Member();
-            member.setId(101L);
-            member.setName("HelloJPA");
+//            Member member = em.find(Member.class, 150L);
+//            member.setName("ZZZZZ"); // persist 하지 않아도 JPA에 의해서 변경사항이 알아서 update된다.
 
-            // 영속
-            System.out.println("=== BEFORE ===");
+            Member member = new Member(200L, "member200");
             em.persist(member);
-            System.out.println("=== AFTER ===");
 
-            Member findMember = em.find(Member.class, 101L); // select 쿼리를 날리지 않음 -> 1차 캐시에 저장되어 있기 때문이다.
+            em.flush();
 
-            System.out.println("findMember.id = " + findMember.getId());
-            System.out.println("findMember.name = " + findMember.getName());
-
+            System.out.println("====================");
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
