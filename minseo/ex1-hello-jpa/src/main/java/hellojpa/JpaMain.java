@@ -16,26 +16,23 @@ public class JpaMain {
 
         try {
 
-            Member member1 = new Member();
-            member1.setUsername("A");
+            // 저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team); // 영속상태가 되면서 Pk값이 설정됨
 
-            Member member2 = new Member();
-            member2.setUsername("B");
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team);
+            em.persist(member);
 
-            Member member3 = new Member();
-            member3.setUsername("C");
+//            em.flush();
+//            em.clear();
 
-            System.out.println("=====================");
+            Member findMember = em.find(Member.class, member.getId()); // 영속성 컨텍스트로 인해 1차 캐시에서 가져오므로 select쿼리가 나가지 않는다.
 
-            em.persist(member1); // 1(더미), 51
-            em.persist(member2); // MEM
-            em.persist(member3); // MEM
-
-            System.out.println("member1 = " + member1.getId());
-            System.out.println("member2 = " + member2.getId());
-            System.out.println("member3 = " + member3.getId());
-
-            System.out.println("=====================");
+            Team findTeam = findMember.getTeam();
+            System.out.println("findTeam = " + findTeam.getName());
 
             tx.commit();
         } catch (Exception e) {
