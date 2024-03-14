@@ -18,6 +18,7 @@ public class Member {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     private Team team; // member가 n이고, team이 1
+    // 값을 업데이트하거나 넣을 때는 이것만 참조한다.
 
     public Long getId() {
         return id;
