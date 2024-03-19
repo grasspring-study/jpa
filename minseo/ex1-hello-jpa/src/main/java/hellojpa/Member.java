@@ -20,6 +20,10 @@ public class Member {
     private Team team; // member가 n이고, team이 1
     // 값을 업데이트하거나 넣을 때는 이것만 참조한다.
 
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
     public Long getId() {
         return id;
     }
