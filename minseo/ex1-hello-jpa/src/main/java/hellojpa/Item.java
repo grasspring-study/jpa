@@ -5,11 +5,10 @@ import jakarta.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn // DTYPE 컬럼 추가 -> 쿼리를 날렸을 때 ALBUM, MOVIE, BOOK 중 어느 것 때문에 들어온 것인지 알 수 있다.
-public abstract class Item {
+public abstract class Item extends BaseEntity {
 
     @Id @GeneratedValue
     private Long id;
-
     private String name;
     private int price;
 
